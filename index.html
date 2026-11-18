@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GameZone</title>
+<style>
+* {box-sizing:border-box}
+body {margin:0;background:#10111c;color:white;font-family:Arial,sans-serif}
+header {background:#191b2c;padding:25px;text-align:center;border-bottom:2px solid #794cff}
+h1 {color:#a78bfa;font-size:35px}
+.container {max-width:1100px;margin:auto;padding:20px}
+input {width:100%;padding:15px;border-radius:10px;border:2px solid #794cff;background:#202235;color:white;font-size:16px}
+.categories {display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+button {background:#794cff;color:white;border:0;padding:11px 15px;border-radius:8px;cursor:pointer}
+button:hover {background:#9b7aff}
+.games {display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:13px}
+.game {background:#202235;padding:15px;border-radius:12px;text-align:center;border:1px solid #383951}
+.game h3 {color:#c4b5fd}
+.game button {width:100%;margin-top:7px}
+footer {text-align:center;color:#777;padding:30px}
+</style>
+</head>
+<body>
+<header><h1>🎮 GAMEZONE</h1><p>119 GAMES. ONE PLACE.</p></header>
+<div class="container">
+<input id="search" placeholder="🔍 Search 119 games..." oninput="showGames()">
+<div class="categories">
+<button onclick="filterGames('All')">All</button>
+<button onclick="filterGames('Arcade')">Arcade</button>
+<button onclick="filterGames('Puzzle')">Puzzle</button>
+<button onclick="filterGames('Action')">Action</button>
+<button onclick="filterGames('Sports')">Sports</button>
+<button onclick="filterGames('Racing')">Racing</button>
+<button onclick="filterGames('Strategy')">Strategy</button>
+<button onclick="filterGames('Favorites')">⭐ Favorites</button>
+</div>
+<div id="games" class="games"></div>
+</div>
+<footer>GAMEZONE © 2026</footer>
+<script>
+const games = [
+["2048","Puzzle","https://play2048.co/"],["Tetris","Puzzle","https://tetris.com/play-tetris"],["Chess","Puzzle","https://www.chess.com/play"],["Cookie Clicker","Arcade","https://orteil.dashnet.org/cookieclicker/"],["Slither.io","Action","https://slither.io/"],["Agar.io","Arcade","https://agar.io/"],["Minecraft Classic","Arcade","https://classic.minecraft.net/"],["Roblox","Action","https://www.roblox.com/"],["Subway Surfers","Arcade","https://poki.com/en/g/subway-surfers"],["Geometry Dash","Arcade","https://poki.com/en/g/geometry-dash"],["Slope","Action","https://poki.com/en/g/slope"],["Run 3","Action","https://www.coolmathgames.com/0-run-3"],["Retro Bowl","Sports","https://www.retrobowl.com/"],["Basketball Stars","Sports","https://poki.com/en/g/basketball-stars"],["Drift Hunters","Racing","https://www.drifthunters.com/"],["Moto X3M","Racing","https://poki.com/en/g/moto-x3m"],["Fireboy and Watergirl","Puzzle","https://www.coolmathgames.com/0-fireboy-and-water-girl"],["Friday Night Funkin","Arcade","https://www.newgrounds.com/portal/view/770371"],["Paper.io","Arcade","https://paper-io.com/"],["1v1.LOL","Action","https://1v1.lol/"],["Pac-Man","Arcade","https://www.google.com/search?q=play+pacman"],["Snake","Arcade","https://www.google.com/search?q=play+snake"],["Minesweeper","Puzzle","https://minesweeper.online/"],["Solitaire","Puzzle","https://solitaired.com/"],["Sudoku","Puzzle","https://sudoku.com/"],["Mahjong","Puzzle","https://www.247mahjong.com/"],["Checkers","Strategy","https://www.coolmathgames.com/"],["Connect 4","Strategy","https://www.mathsisfun.com/games/connect4.html"],["Wordle","Puzzle","https://www.nytimes.com/games/wordle/index.html"],["Word Search","Puzzle","https://thewordsearch.com/"],["Crossword","Puzzle","https://www.boatloadpuzzles.com/playcrossword"],["Little Alchemy 2","Puzzle","https://littlealchemy2.com/"],["Worldle","Puzzle","https://worldle.teuteuf.fr/"],["Globle","Puzzle","https://globle-game.com/"],["Geoguessr","Puzzle","https://www.geoguessr.com/"],["ChessKid","Strategy","https://www.chesskid.com/"],["Lichess","Strategy","https://lichess.org/"],["Backgammon","Strategy","https://www.coolmathgames.com/"],["Battleship","Strategy","https://www.mathsisfun.com/games/battleship.html"],["Reversi","Strategy","https://www.mathsisfun.com/games/reversi.html"],["CheckiO","Puzzle","https://checkio.org/"],["Doodle Jump","Arcade","https://poki.com/"],["Crossy Road","Arcade","https://poki.com/"],["Temple Run","Arcade","https://poki.com/"],["Jetpack Joyride","Arcade","https://poki.com/"],["Flappy Bird","Arcade","https://flappybird.io/"],["Helix Jump","Arcade","https://poki.com/"],["Stack","Arcade","https://poki.com/"],["Color Switch","Arcade","https://poki.com/"],["Fruit Ninja","Arcade","https://poki.com/"],["Cut the Rope","Puzzle","https://poki.com/"],["Angry Birds","Puzzle","https://www.angrybirds.com/"],["Bad Ice Cream","Arcade","https://www.coolmathgames.com/"],["World's Hardest Game","Arcade","https://www.coolmathgames.com/"],["Papa's Pizzeria","Strategy","https://www.coolmathgames.com/"],["Papa's Freezeria","Strategy","https://www.coolmathgames.com/"],["Idle Breakout","Arcade","https://www.coolmathgames.com/"],["Bloxorz","Puzzle","https://www.coolmathgames.com/"],["Parking Fury","Racing","https://poki.com/"],["Duck Life","Arcade","https://www.coolmathgames.com/"],["Learn to Fly","Arcade","https://www.coolmathgames.com/"],["Football Legends","Sports","https://poki.com/"],["Soccer Skills","Sports","https://poki.com/"],["Penalty Shooters","Sports","https://poki.com/"],["Head Basketball","Sports","https://poki.com/"],["8 Ball Pool","Sports","https://www.miniclip.com/"],["Bowling Stars","Sports","https://poki.com/"],["Tennis Masters","Sports","https://poki.com/"],["Golf Battle","Sports","https://poki.com/"],["Volleyball Challenge","Sports","https://poki.com/"],["Baseball Bros","Sports","https://baseballbros.io/"],["Football Bros","Sports","https://footballbros.io/"],["Basketball Bros","Sports","https://basketballbros.io/"],["Wrestle Bros","Sports","https://wrestlebros.io/"],["Ragdoll Archers","Action","https://poki.com/"],["Stickman Hook","Arcade","https://poki.com/"],["Drift Boss","Racing","https://drift-boss.com/"],["Madalin Stunt Cars","Racing","https://www.madalin-stunt-cars.com/"],["Traffic Racer","Racing","https://poki.com/"],["Highway Racer","Racing","https://poki.com/"],["Car Rush","Racing","https://poki.com/"],["Extreme Car Driving","Racing","https://poki.com/"],["Racing Limits","Racing","https://poki.com/"],["Hill Climb Racing","Racing","https://poki.com/"],["Monster Truck","Racing","https://poki.com/"],["City Car Driving","Racing","https://poki.com/"],["Bloons TD","Strategy","https://ninjakiwi.com/"],["Kingdom Rush","Strategy","https://www.kingdomrush.com/"],["Plants vs Zombies","Strategy","https://www.ea.com/"],["Chess Puzzle","Puzzle","https://lichess.org/training"],["2048 Cupcakes","Puzzle","https://www.coolmathgames.com/"],["Tower Defense","Strategy","https://poki.com/"],["Merge Dragons","Puzzle","https://poki.com/"],["Idle Miner","Strategy","https://www.idleminertycoon.com/"],["Antimatter Dimensions","Strategy","https://ivark.github.io/"],["Universal Paperclips","Strategy","https://www.decisionproblem.com/paperclips/"],["Among Us","Action","https://www.innersloth.com/games/among-us/"],["Krunker","Action","https://krunker.io/"],["Diep.io","Action","https://diep.io/"],["Wings.io","Action","https://wings.io/"],["Gartic Phone","Arcade","https://garticphone.com/"],["Skribbl.io","Arcade","https://skribbl.io/"],["Gartic.io","Arcade","https://gartic.io/"],["Town of Salem","Strategy","https://www.blankmediagames.com/"],["Surviv.io","Action","https://surviv.io/"],["Bonk.io","Action","https://bonk.io/"],["Shell Shockers","Action","https://shellshock.io/"],["Smash Karts","Action","https://smashkarts.io/"],["Zombs Royale","Action","https://zombsroyale.io/"],["Hole.io","Arcade","https://hole-io.com/"],["Poki Games","Arcade","https://poki.com/"],["CrazyGames","Arcade","https://www.crazygames.com/"],["Miniclip","Arcade","https://www.miniclip.com/"],["Coolmath Games","Puzzle","https://www.coolmathgames.com/"],["Newgrounds","Arcade","https://www.newgrounds.com/"],["Itch.io Games","Arcade","https://itch.io/games/free"]
+];
+let currentFilter="All";
+let favorites=JSON.parse(localStorage.getItem("gameFavorites")||"[]");
+function filterGames(category){currentFilter=category;showGames()}
+function showGames(){const search=document.getElementById("search").value.toLowerCase();const container=document.getElementById("games");container.innerHTML="";games.filter(game=>{const matchesSearch=game[0].toLowerCase().includes(search);const matchesCategory=currentFilter==="All"||(currentFilter==="Favorites"&&favorites.includes(game[0]))||game[1]===currentFilter;return matchesSearch&&matchesCategory}).forEach(game=>{const card=document.createElement("div");card.className="game";const title=document.createElement("h3");title.textContent=game[0];const category=document.createElement("p");category.textContent=game[1];const play=document.createElement("button");play.textContent="▶ Play";play.onclick=()=>window.open(game[2],"_blank","noopener,noreferrer");const favorite=document.createElement("button");favorite.textContent=favorites.includes(game[0])?"★ Favorited":"☆ Favorite";favorite.onclick=()=>{favorites=favorites.includes(game[0])?favorites.filter(n=>n!==game[0]):[...favorites,game[0]];localStorage.setItem("gameFavorites",JSON.stringify(favorites));showGames()};card.append(title,category,play,favorite);container.appendChild(card)})}
+showGames();
+</script>
+</body>
+</html>
